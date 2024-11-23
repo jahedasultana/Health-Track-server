@@ -23,6 +23,25 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
+
+    const userCollections = client.db('Health-Track').collection('users');
+
+    app.post("/userCreate", async(req,res) =>{
+      const body = req.body;
+      const {email,userRole,name} = body;
+      console.log(body);
+      return
+      try {
+        const existingUser = await userCollections.findOne({email:email})
+        if(existingUser){
+          return res.send({message: "user already off"})
+        }
+        
+      } catch (error) {
+        
+      }
+    })
+
     
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
