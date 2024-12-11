@@ -23,7 +23,7 @@ async function run() {
   try {
 
     const userCollections = client.db('Health-Track').collection('users');
-    const doctorsCollections = client.db('Health-Track').collection('doctors');
+    const serviceCollections = client.db('Health-Track').collection('services');
 
     app.post("/userCreate", async(req,res) =>{
       const body = req.body;
@@ -67,7 +67,39 @@ app.get("/doctors/:id", async (req, res) => {
   }
 });
 
+app.post('/service_request', async(req,res)=>{
+  const serviceData = req.body;
 
+  try {
+    const result = await serviceCollections.insertOne(serviceData)
+    return res.send(result)
+  } catch (error) {
+    console.log(error);
+  }
+
+})
+
+app.post('/service_request', async(req,res)=>{
+  const serviceData = req.body;
+
+  try {
+    const result = await serviceCollections.insertOne(serviceData)
+    return res.send(result)
+  } catch (error) {
+    console.log(error);
+  }
+
+})
+
+// use this route two data get pourpous , chnage it after make user
+app.get('/user_data_get', async (req,res)=>{
+  try {
+    const result = await serviceCollections.find().toArray()
+    return res.send(result)
+  } catch (error) {
+    console.log(error);
+  }
+})
 
 
 
