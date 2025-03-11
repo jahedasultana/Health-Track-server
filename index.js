@@ -187,7 +187,7 @@ async function run() {
     app.get('/doctor_service/:email', async (req, res) => {
       const { email } = req.params;
 
-      const result = await serviceCollections.findOne({doctorEmail: email});
+      const result = await serviceCollections.find({doctorEmail: email}).toArray();
       res.send(result)
     });
 
